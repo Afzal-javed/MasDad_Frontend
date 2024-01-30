@@ -10,6 +10,7 @@ import Drawing from './pages/Drawing'
 import Notes from './pages/Notes'
 import Services from "./pages/Services";
 import Estimate from './pages/Estimate'
+import EmailVerify from './pages/EmailVerify'
 function App() {
   return (
     <div>
@@ -24,6 +25,7 @@ function App() {
         <Route path='services' element={<Services />} />
         <Route path='/drawing' element={<Drawing />} />
         <Route path='/estimate' element={<Estimate />} />
+        <Route path='/email-verify' element={<EmailVerify />} />
       </Routes>
     </div>
   )

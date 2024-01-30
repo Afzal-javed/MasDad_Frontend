@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import signImage from "../assets/logos/signupImage.jpg";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { login } from '../redux/userSlice';
 import { toast } from 'react-hot-toast';
 const Login = () => {
     const userData = useSelector((state) => state.user)
+    const [isVerified, setIsVerified] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState({
