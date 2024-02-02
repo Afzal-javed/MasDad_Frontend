@@ -14,6 +14,8 @@ const Header = () => {
     const navigate = useNavigate();
     const handleLogout = async () => {
         const userId = userData.id;
+
+
         try {
             const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/user/logout/${userId}`)
             if (res.status === 200) {
@@ -49,7 +51,7 @@ const Header = () => {
                         isShowDrawing &&
                         <div className='absolute right-0 top-10 p-1 bg-slate-300 text-center rounded-md w-[10rem]'>
                             {
-                                userData.email === "imashelp@gmail.com" &&
+                                userData.email === import.meta.env.VITE_EMAIL_ID &&
                                 <>
                                     <p className='text-lg text-slate-900 cursor-pointer hover:bg-slate-900 hover:text-white' onClick={() => navigate("/upload-doc")}>UPLOAD FILE</p>
                                 </>

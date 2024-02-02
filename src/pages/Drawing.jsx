@@ -105,7 +105,7 @@ const Drawing = () => {
         })
     }
     const handlePhoneCallClick = () => {
-        const phoneNumber = '8009205951';
+        const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;
         const telUrl = `tel:${phoneNumber}`;
         window.open(telUrl, '_blank');
     };
@@ -181,7 +181,7 @@ const Drawing = () => {
     };
     return (
         <>
-            <div className='w-full flex flex-col bg-[#8adada]'>
+            <div className='w-full min-h-screen flex flex-col bg-[#8adada]'>
                 <div className='flex items-center p-4 gap-4 w-full'>
                     <div className='w-[50%] flex bg-white rounded-xl shadow-xl flex-col items-center gap-3'>
                         <h1 className='w-full text-xl font-semibold bg-blue-700 p-3 text-center rounded-t-xl text-white'>Search Sample Plan</h1>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import RightCol from '../components/RightCol'
 import { FaCalculator } from "react-icons/fa6";
+import PlanCard from '../components/PlanCard';
 const Estimate = () => {
     const [selectedCheckbox, setSelectedCheckbox] = useState(null);
     const [showWorkList, setShowWorkList] = useState(false);
@@ -29,7 +30,15 @@ const Estimate = () => {
         }))
         setNewArea(buildArea);
     }
-    console.log(newArea);
+    const handleLocation = (e) => {
+        setLocation(e.target.value)
+        setAmount((curr) => ({
+            ...curr,
+            basic: (Math.round(calculatedBuildUpArea * priceWithLocation[location].basicCost) * floor),
+            premium: (Math.round(calculatedBuildUpArea * priceWithLocation[location].premiumCost) * floor),
+            luxury: (Math.round(calculatedBuildUpArea * priceWithLocation[location].luxuryCost) * floor)
+        }))
+    }
     const handleFloorInput = (e) => {
         setFloor(e.target.value);
     }
@@ -55,7 +64,7 @@ const Estimate = () => {
                     <h1 className='w-full h-[4rem] bg-blue-700 text-xl flex items-center justify-center mb-3 text-white font-semibold rounded-t-lg text-center p-3' ><span><FaCalculator /></span>Construction and Material Cost</h1>
                     <div className='w-[70%] my-3 flex items-center gap-x-4'>
                         <label htmlFor='loaction' className='my-3 text-lg font-semibold items-start'>Location</label>
-                        <select id='location' name='location' value={location} onChange={(e) => setLocation(e.target.value)} className='w-[20rem] p-2 bg-slate-300 rounded-lg outline-none'>
+                        <select id='location' name='location' value={location} onChange={handleLocation} className='w-[20rem] p-2 bg-slate-300 rounded-lg outline-none'>
                             <option>Select Location</option>
                             <option value={0}>Azamgarh</option>
                             <option value={1}>Lucknow</option>
@@ -151,52 +160,24 @@ const Estimate = () => {
 
             </div>
             <div className='w-full p-3 flex items-center justify-center gap-3'>
-                <div className='my-4 w-[32%]  shadow-lg flex flex-col items-center rounded-xl bg-slate-300'>
-                    <h1 className='w-full h-[3rem] bg-slate-700 text-xl rounded-t-xl flex items-center justify-center mb-3 text-white font-semibold text-center p-2' >Basic Plan</h1>
-                    <div className='w-full flex my-2'>
-                        <p className='w-[50%] text-lg ml-5 font-semibold'>Total Buildup Area :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'>{newArea}<span className='text-black'>sqft</span></span>
-                    </div>
-                    <div className='w-full flex my-2'>
-                        <p className='w-[40%] text-lg ml-5 font-semibold'>Total Amount :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'><span className='text-black'>₹ :</span>{amount.basic}</span>
-                    </div>
-                    <div className='w-full mb-4 flex'>
-                        <p className='w-[40%] text-lg ml-5 font-semibold'>Cost Calculated :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'><span className='text-black'>Rs : </span>{priceWithLocation[location].basicCost}/sqft</span>
-                    </div>
-                </div>
-                <div className='my-4 w-[32%]  shadow-lg flex flex-col items-center rounded-xl bg-slate-300'>
-                    <h1 className='w-full h-[3rem] bg-slate-700 text-xl rounded-t-xl flex items-center justify-center mb-3 text-white font-semibold text-center p-2' >Premiun Plan</h1>
-                    <div className='w-full flex my-2'>
-                        <p className='w-[50%] text-lg ml-5 font-semibold'>Total Buildup Area :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'>{newArea}<span className='text-black'>sqft</span></span>
-                    </div>
-                    <div className='w-full flex my-2'>
-                        <p className='w-[40%] text-lg ml-5 font-semibold'>Total Amount :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'><span className='text-black'>₹ :</span>{amount.premium}</span>
-                    </div>
-                    <div className='w-full flex mb-4'>
-                        <p className='w-[40%] text-lg ml-5 font-semibold'>Cost Calculated :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'><span className='text-black'>Rs : </span>{priceWithLocation[location].premiumCost}/sqft</span>
-                    </div>
-                </div>
-                <div className='my-4 w-[32%] shadow-lg flex flex-col items-center rounded-xl bg-slate-300'>
-                    <h1 className='w-full h-[3rem] bg-slate-700 text-xl rounded-t-xl flex items-center justify-center mb-3 text-white font-semibold text-center p-2' >Luxury Plan</h1>
-                    <div className='w-full flex my-2'>
-                        <p className='w-[50%] text-lg ml-5 font-semibold'>Total Buildup Area :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'>{newArea}<span className='text-black'>sqft</span></span>
-                    </div>
-                    <div className='w-full flex my-2'>
-                        <p className='w-[40%] text-lg ml-5 font-semibold'>Total Amount :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'><span className='text-black'>₹ :</span>{amount.luxury}</span>
-                    </div>
-                    <div className='w-full flex mb-4'>
-                        <p className='w-[40%] text-lg ml-5 font-semibold'>Cost Calculated :-</p>
-                        <span className='text-xl font-bold text-red-700 ml-auto mr-4'><span className='text-black'>Rs : </span>{priceWithLocation[location].luxuryCost}/sqft</span>
-                    </div>
-                </div>
-
+                <PlanCard
+                    plan={"Basic PLan"}
+                    newArea={newArea}
+                    amount={amount.basic}
+                    basicCost={priceWithLocation[location].basicCost}
+                />
+                <PlanCard
+                    plan={"Premium PLan"}
+                    newArea={newArea}
+                    amount={amount.premium}
+                    basicCost={priceWithLocation[location].premiumCost}
+                />
+                <PlanCard
+                    plan={"Luxury PLan"}
+                    newArea={newArea}
+                    amount={amount.luxury}
+                    basicCost={priceWithLocation[location].luxuryCost}
+                />
             </div>
         </div>
     )

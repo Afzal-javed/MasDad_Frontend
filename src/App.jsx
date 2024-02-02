@@ -11,6 +11,7 @@ import Notes from './pages/Notes'
 import Services from "./pages/Services";
 import Estimate from './pages/Estimate'
 import EmailVerify from './pages/EmailVerify'
+import PasswordReset from './pages/PasswordReset'
 function App() {
   return (
     <div>
@@ -26,6 +27,7 @@ function App() {
         <Route path='/drawing' element={<Drawing />} />
         <Route path='/estimate' element={<Estimate />} />
         <Route path='/email-verify' element={<EmailVerify />} />
+        <Route path='/reset-password' element={<PasswordReset />} />
       </Routes>
     </div>
   )

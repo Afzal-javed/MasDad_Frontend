@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import loginImage from "../assets/logos/loginImage.jpg";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import { toast } from "react-hot-toast";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../config/firebase_config';
 import { useDispatch } from 'react-redux';
 import { register } from '../redux/userSlice';
-import { FcGoogle } from "react-icons/fc";
+
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -43,51 +42,6 @@ const Signup = () => {
             toast("Server Issue try after some time");
         }
     }
-    const handleVerification = async () => {
-        try {
-            const provider = new GoogleAuthProvider();
-            const res = await signInWithPopup(auth, provider);
-            console.log(res);
-
-            const user = res.user;
-            const { displayName, email, uid } = user
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    // useEffect(() => {
-    //     const userPost = async () => {
-    //         try {
-    //             if (isVerified) {
-    //                 const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/user/register`, data);
-    //                 console.log(res.data);
-    //                 if (res.status === 200) {
-    //                     toast(res?.data?.msg);
-    //                     navigate("/login");
-    //                 }
-    //             }
-    //         } catch (error) {
-    //             if (error?.response?.status === 400) {
-    //                 toast(error?.response?.data)
-    //             }
-    //             if (error?.response?.status === 500) {
-    //                 toast(error?.res?.data)
-    //             }
-    //         }
-    //     }
-    //     userPost();
-    // }, [isVerified])
-    // useEffect(() => {
-    //     const unsubscribe = auth.onAuthStateChanged((userData) => {
-    //         console.log(userData.emailVerified);
-    //         setIsVerified(userData.emailVerified);
-    //     });
-
-    //     return () => {
-    //         // Unsubscribe when the component is unmounted
-    //         unsubscribe();
-    //     };
-    // }, []);
     return (
         <div className='w-full bg-slate-300 h-screen flex items-center justify-center'>
             <div className='bg-white w-[70%] p-4 rounded-3xl shadow-xl flex'>
@@ -119,9 +73,6 @@ const Signup = () => {
                             <button type='submit' className='w-[10rem] p-2  transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-950 duration-300  rounded-full text-center text-white text-lg font-semibold'>Register</button>
                         </div>
                     </form>
-                    <div className='w-full flex items-center justify-center my-5'>
-                        <button className='w-[50%] text-lg border-2 p-1 rounded-lg border-black flex cursor-pointer bg-slate-200 items-center justify-center' type='button' onClick={handleVerification}>Continue with Google <span className='text-2xl  ml-2' style={{ display: 'inline-block' }}><FcGoogle /></span></button>
-                    </div>
                     <div className='w-full flex items-center justify-center mt-3'>
                         <p className='text-lg'>Already have an account ? <span className='text-blue-700 cursor-pointer' onClick={() => navigate("/login")}>Login</span></p>
                     </div>
