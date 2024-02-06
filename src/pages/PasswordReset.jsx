@@ -123,11 +123,11 @@ const PasswordReset = () => {
                                 <>
                                     <div className='w-full flex flex-col items-center gap-0.5 my-2'>
                                         <label htmlFor='newPassword' className='w-[90%] text-lg items-start'>New Password</label>
-                                        <input type='newPassword' id='newPassword' autoComplete='off' name='newPassword' onChange={handlePasswordChange} className='w-[90%] bg-white  p-1 border-b-2  outline-none ' placeholder='Enter Your New Password...' />
+                                        <input type='password' id='newPassword' autoComplete='off' name='newPassword' onChange={handlePasswordChange} className='w-[90%] bg-white  p-1 border-b-2  outline-none ' placeholder='Enter Your New Password...' />
                                     </div>
                                     <div className='w-full flex flex-col items-center gap-0.5 my-2'>
                                         <label htmlFor='confirmPassword' className='w-[90%] text-lg items-start'>Confirm Password</label>
-                                        <input type='confirmPassword' id='confirmPassword' autoComplete='off' name='confirmPassword' onChange={handlePasswordChange} className='w-[90%] bg-white  p-1 border-b-2  outline-none ' placeholder='Enter Your Confirm Password...' />
+                                        <input type='password' id='confirmPassword' autoComplete='off' name='confirmPassword' onChange={handlePasswordChange} className='w-[90%] bg-white  p-1 border-b-2  outline-none ' placeholder='Enter Your Confirm Password...' />
                                     </div>
                                     <div className='p-3 gap-2 flex flex-col items-center justify-center'>
                                         <button type='' className='w-[10rem] my-2 text-lg p-2 bg-black text-white cursor-pointer transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-200 rounded-lg'>Update Password</button>

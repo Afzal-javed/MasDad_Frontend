@@ -12,6 +12,8 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { setDocData } from '../redux/docSlice';
 import Card from '../components/Card';
 import RightCol from '../components/RightCol';
+import Input from '../components/Input';
+import Button from "../components/Button";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -32,7 +34,6 @@ const Drawing = () => {
         category: "",
         totalArea: ""
     })
-
     const docData = allData?.docList.filter((doc) => doc.category === data.category)
     useEffect(() => {
         console.log(searchData);
@@ -181,29 +182,26 @@ const Drawing = () => {
     };
     return (
         <>
-            <div className='w-full min-h-screen flex flex-col bg-[#8adada]'>
+            <div className='w-full min-h-screen flex flex-col bg-white'>
                 <div className='flex items-center p-4 gap-4 w-full'>
-                    <div className='w-[50%] flex bg-white rounded-xl shadow-xl flex-col items-center gap-3'>
-                        <h1 className='w-full text-xl font-semibold bg-blue-700 p-3 text-center rounded-t-xl text-white'>Search Sample Plan</h1>
+                    <div className='w-[50%] flex bg-white rounded-xl shadow-xl flex-col items-center gap-1'>
+                        <h1 className='w-full text-2xl font-semibold bg-black p-4 text-center rounded-t-xl text-white'>Search Sample Plan</h1>
                         <div className='mt-3 flex items-center  gap-4'>
                             <p className='text-xl font-semibold'>Book a free consultation :-</p>
                             <span className='text-3xl text-blue-700 cursor-pointer' onClick={handlePhoneCallClick}><BiSolidPhoneCall /></span>
                         </div>
                         <div className='w-full flex items-center justify-between p-2'>
-                            <div className='w-[40%] ml-4 gap-1'>
-                                <label htmlFor='length' className='item-start text-lg'>By Length</label>
-                                <input type='number' id='length' name='length' value={data.length} onChange={handleChange} className='p-1.5 w-full rounded-lg outline-none border-b-2 ' placeholder='Enter length...' />
-                            </div>
-                            <div className='w-[40%] mr-4 gap-1'>
-                                <label htmlFor='breadth' className='item-start text-lg'>By Breadth</label>
-                                <input type='number' id='breadth' name='breadth' value={data.breadth} onChange={handleChange} className='p-1.5 w-full rounded-lg outline-none border-b-2 ' placeholder='Enter breadth...' />
-                            </div>
+                            <Input divStyle={'w-[40%] flex-col ml-4 gap-1'} label={"By Length"} labelStyle={'w-full'} labelFor={'length'} type={'number'} name={'length'} value={data.length}
+                                onChange={handleChange} placeholder={'Enter length...'} inputStyle={'w-full shadow-lg'}
+                            />
+                            <Input divStyle={'w-[40%] flex-col mr-4 gap-1'} label={"By Breadth"} labelStyle={'w-full'} labelFor={'breadth'} type={'number'} name={'breadth'} value={data.breadth}
+                                onChange={handleChange} placeholder={'Enter breadth...'} inputStyle={'w-full shadow-lg'}
+                            />
                         </div>
                         <div className='w-[100%] flex items-center justify-between gap-1.5 p-2'>
-                            <div className='w-[40%] ml-4 gap-1.5'>
-                                <label htmlFor='totalArea' className='item-start text-lg'>By Area</label>
-                                <input type='number' id='totalArea' name='totalArea' value={data.totalArea} onChange={handleChange} className='p-1.5 w-full rounded-lg outline-none border-b-2 ' placeholder='Enter Square Feet' />
-                            </div>
+                            <Input divStyle={'w-[40%] flex-col ml-4 gap-1'} label={"By Area"} labelStyle={'w-full'} labelFor={'totalArea'} type={'number'} name={'totalArea'} value={data.totalArea}
+                                onChange={handleChange} placeholder={'Enter Square Feet...'} inputStyle={'w-full shadow-lg'}
+                            />
                             <div className='w-[40%] mr-4 flex flex-col gap-1'>
                                 <label htmlFor='category' className='item-start text-lg'>Category</label>
                                 <select className='p-1.5 outline-none border-b-2 rounded-lg ' id='category' name='category' value={data.category} onChange={handleChange}>
@@ -217,13 +215,15 @@ const Drawing = () => {
                             </div>
                         </div>
                         <div className='w-full flex items-center justify-center my-5'>
-                            <button type='button' className='w-[10rem] p-2   hover:bg-blue-950  bg-blue-700 rounded-full text-center text-white text-lg font-semibold' onClick={handleSearch}>Search Now</button>
+                            <Button type={'button'} style={'w-[10rem]'} onClick={handleSearch} buttonName={'Search Now'} />
                         </div>
 
                     </div>
 
                     <div className='w-[50%]'>
-                        <RightCol />
+                        <RightCol
+
+                        />
                     </div>
 
                 </div>
@@ -280,7 +280,7 @@ const Drawing = () => {
                                 Download Now
                             </button>
                             {
-                                userData.email === "imashelp@gmail.com" &&
+                                userData.email === import.meta.env.VITE_EMAIL_ID &&
                                 <span className='cursor-pointer'> <AiFillDelete onClick={() => handleDelete(selectedDoc.docId)} /></span>
                             }
                         </span>

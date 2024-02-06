@@ -4,10 +4,12 @@ import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import { userSliceReducer } from "./userSlice";
 import { docSliceReducers } from "./docSlice";
+import { packageSliceReducer } from "./packageDataSlice";
 
 const rootReducer = combineReducers({
     user: userSliceReducer,
-    doc: docSliceReducers
+    doc: docSliceReducers,
+    packageData: packageSliceReducer
 });
 
 const persistConfig = {

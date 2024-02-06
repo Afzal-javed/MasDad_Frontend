@@ -39,7 +39,7 @@ const Signup = () => {
         }
         catch (error) {
             console.log("kuch gadbad hai")
-            toast("Server Issue try after some time");
+            toast("Email already Exist");
         }
     }
     return (
