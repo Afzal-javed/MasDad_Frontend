@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import image1 from "../assets/images/image1.jpg";
 import image2 from "../assets/images/image2.jpg";
 import image3 from "../assets/images/image3.jpg";
@@ -24,23 +24,45 @@ import image23 from "../assets/images/image23.jpg";
 import image24 from "../assets/images/image24.jpg";
 import image25 from "../assets/images/image25.jpg";
 import image26 from "../assets/images/image26.jpg";
-const RightCol = () => {
+const RightCol = ({ style }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20, image21, image22, image23, image24, image25, image26];
+    const delay = 2000;
+    const timeoutRef = useRef(null);
+
+    function resetTimeout() {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    }
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 2000);
-        return () => clearInterval(intervalId);
-    }, [images.length]);
+        resetTimeout();
+        timeoutRef.current = setTimeout(
+            () =>
+                setCurrentImageIndex((prev) =>
+                    prev === images.length - 1 ? 0 : prev + 1
+                ),
+            delay
+        )
+        return () => {
+            resetTimeout();
+        };
+    }, [currentImageIndex]);
     return (
         <>
-            <div className='flex items-center justify-center mb-4'>
+            <div className='flex items-center justify-center my-3'>
                 <p className='text-lg font-semibold '>You can see your plan here soon</p>
             </div>
-            <div className='w-full h-[28rem] overflow-hidden rounded-2xl'>
-                <img className='object-cover rounded-2xl' src={images[currentImageIndex]} alt='images' />
+            <div className={`max-w-[500px] my-0 mx-auto overflow-hidden ${style}`}>
+                <div className='whitespace-nowrap transition ease-in duration-1000' style={{ transform: `translate3d(${-currentImageIndex * 100}%, 0, 0)` }}>
+                    {
+                        images.map((curr, index) => (
+                            <img key={index} className='inline-block w-full h-[30rem]' src={curr} alt='images' />
+                        ))
+                    }
+                </div>
+                {/* <img className='object-cover rounded-2xl' src={images[currentImageIndex]} alt='images' /> */}
             </div>
         </>
     )

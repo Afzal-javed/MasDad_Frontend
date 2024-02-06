@@ -3,12 +3,12 @@ import { IoLogoWhatsapp } from "react-icons/io"
 import { BiSolidPhoneCall } from "react-icons/bi"
 const LeftCol = () => {
     const handleWhatsappClick = () => {
-        const whatsappNumber = '8009205951';
+        const whatsappNumber = import.meta.env.VITE_PHONE_NUMBER;
         const whatsappUrl = `https://wa.me/${whatsappNumber}`;
         window.open(whatsappUrl, '_blank');
     };
     const handlePhoneCallClick = () => {
-        const phoneNumber = '8009205951';
+        const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;
         const telUrl = `tel:${phoneNumber}`;
         window.open(telUrl, '_blank');
     };

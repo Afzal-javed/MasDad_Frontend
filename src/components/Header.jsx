@@ -14,6 +14,8 @@ const Header = () => {
     const navigate = useNavigate();
     const handleLogout = async () => {
         const userId = userData.id;
+
+
         try {
             const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/user/logout/${userId}`)
             if (res.status === 200) {
@@ -31,12 +33,12 @@ const Header = () => {
         }
     }
     return (
-        <div className='bg-teal-700 w-full h-14 flex items-center shadow-lg'>
-            <div className='ml-4'>
-                <img src={logo} className='object-cover overflow-hidden rounded-full' alt='logo' width={45} height={45} />
+        <div className='bg-black w-full h-14 flex items-center shadow-lg'>
+            <div className='ml-4 border-white'>
+                <img src={logo} className='object-cover border-2 border-white overflow-hidden rounded-full' alt='logo' width={45} height={45} />
             </div>
             <div className='ml-6  flex flex-col items-center'>
-                <p className='text-2xl font-semibold text-red-800'>MAS<span className='text-white'>-DAD</span></p>
+                <p className='text-2xl font-semibold text-red-500'>MAS<span className='text-white'>-DAD</span></p>
                 <p className='text-md italic text-white'>Design your Desire</p>
             </div>
             <nav className='flex gap-6 ml-auto'>
@@ -47,9 +49,9 @@ const Header = () => {
                     <li className='text-white text-lg cursor-pointer'>Drawing</li>
                     {
                         isShowDrawing &&
-                        <div className='absolute right-0 top-10 p-1 bg-slate-300 text-center rounded-md w-[10rem]'>
+                        <div className='absolute right-0 top-10 bg-white text-center  w-[10rem] z-10'>
                             {
-                                userData.email === "imashelp@gmail.com" &&
+                                userData.email === import.meta.env.VITE_EMAIL_ID &&
                                 <>
                                     <p className='text-lg text-slate-900 cursor-pointer hover:bg-slate-900 hover:text-white' onClick={() => navigate("/upload-doc")}>UPLOAD FILE</p>
                                 </>
@@ -74,7 +76,7 @@ const Header = () => {
                 <span className='text-3xl text-white ' ><BiSolidUser /></span>
                 {
                     isShowLogin &&
-                    <div className='absolute -right-2 rounded-md top-10 w-[10rem] p-1 bg-slate-300 text-center'>
+                    <div className='absolute -right-2 top-10 w-[10rem] bg-white text-center'>
                         {
                             userData.token ?
                                 <>
